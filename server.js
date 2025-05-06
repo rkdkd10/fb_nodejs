@@ -36,5 +36,14 @@ app.post('/api/submit', upload.none(), async (req, res) => {
   }
 });
 
+app.get('/api/data', async (req, res) => {
+  try {
+    const allData = await FBData.find().sort({ createdAt: -1 }); // Sort by newest first
+    res.status(200).json({ success: true, data: allData });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
