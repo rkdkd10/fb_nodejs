@@ -5,7 +5,10 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: ['https://fb-react-omega.vercel.app/api/data'],
+  credentials: true
+}));
 app.use(express.json());
 const upload = multer();
 
